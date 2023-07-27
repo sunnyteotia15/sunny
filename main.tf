@@ -46,3 +46,17 @@ resource "azurerm_subnet" "db-subnet" {
   resource_group_name  = azurerm_resource_group.resourceGroup.name
   address_prefixes     = var.dbSubnetAddressSpace
 }
+resource "azurerm_sql_server" "sqlServer" {
+  name = var.sqlServerName
+  resource_group_name = azurerm_resource_group.resourceGroup.name
+  location = azurerm_resource_group.resourceGroup.location
+  administrator_login = var.sqlServer_admin
+  administrator_login_password = var.sqlServer_password
+}
+
+resource "azurerm_sql_database" "db" {
+  name                = var.databaseName
+  resource_group_name = azurerm_resource_group.resourceGroup.name
+  location            = azurerm_resource_group.resourceGroup.location
+  server_name         = azurerm_sql_server.sqlServer.name
+}
