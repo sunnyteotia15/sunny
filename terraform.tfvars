@@ -1,0 +1,20 @@
+resourceGroupName = "rg01"
+location = "West US"      
+vnetName = "vnet01"
+vnetAddressSpace= "10.0.0.0/26"
+web-subnet = "subnet01"
+webSubnetAddressSpace = "10.1.0.0/28"
+app-subnet = "subnet02"
+appSubnetAddressSpace = "10.2.0.0/28"
+db-subnet = "subnet03"
+dbSubnetAddressSpace = "10.3.0.0/28"
+sqlServerName = "sql-server01"
+sqlServer_admin = "admin"
+sqlServer_password = "admin0123"
+databaseName = "sqldatabse01"
+appServicePlan = "app-plan-01"
+storageAccountName = "storageApp01"
+appName = "functionApp123"
+
+## admin password can also be stored in key vault for security reasons
+
