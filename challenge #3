@@ -1,0 +1,14 @@
+function findProp(obj, prop) {
+  var result = [];
+  function recursivelyFindProp(o, keyToBeFound) {
+    Object.keys(o).forEach(function (key) {
+      if (typeof o[key] === 'object') {
+        recursivelyFindProp(o[key], keyToBeFound);
+      } else {
+        if (key === keyToBeFound) result.push(o[key]);
+      }
+    });
+  }
+  recursivelyFindProp(obj, prop);
+  return result;
+}
