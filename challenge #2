@@ -1,0 +1,7 @@
+If this is about querying meta data of Azure sql - 
+# We can use "GetMetadata" activity in Azure data factory to query the meta data of azure sql instance.
+ # We can create a dataset and use it under "settings" while configuring the activity.
+
+If this is about querying metadata from Azure VM -
+# We can use the below powershell command 
+  Invoke-RestMethod -Headers @{"Metadata"="true"} -Method GET -NoProxy -Uri "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | ConvertTo-Json -Depth 64
