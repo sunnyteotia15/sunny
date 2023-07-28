@@ -35,6 +35,7 @@ resource "azurerm_subnet" "web-subnet" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   resource_group_name  = azurerm_resource_group.resourceGroup.name
   address_prefixes     = var.webSubnetAddressSpace
+  depends_on           = [ azurerm_virtual_network.vnet ]
 }
 
 resource "azurerm_subnet" "app-subnet" {
@@ -42,6 +43,7 @@ resource "azurerm_subnet" "app-subnet" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   resource_group_name  = azurerm_resource_group.resourceGroup.name
   address_prefixes     = var.appSubnetAddressSpace
+  depends_on           = [ azurerm_virtual_network.vnet ]
 }
 
 resource "azurerm_subnet" "db-subnet" {
@@ -49,6 +51,7 @@ resource "azurerm_subnet" "db-subnet" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   resource_group_name  = azurerm_resource_group.resourceGroup.name
   address_prefixes     = var.dbSubnetAddressSpace
+  depends_on           = [ azurerm_virtual_network.vnet ]
 }
 
 #create sql server to host sql database
@@ -66,6 +69,7 @@ resource "azurerm_sql_database" "db" {
   resource_group_name = azurerm_resource_group.resourceGroup.name
   location            = azurerm_resource_group.resourceGroup.location
   server_name         = azurerm_sql_server.sqlServer.name
+  depends_on           = [ azurerm_sql_server.sqlServer ]
 }
 
 #create app service plan to host azure function app
@@ -97,4 +101,5 @@ resource "azurerm_function_app" "app" {
   app_service_plan_id        = azurerm_app_service_plan.appServicePlan.id
   storage_account_name       = azurerm_storage_account.storageAccount.name
   storage_account_access_key = azurerm_storage_account.storageAccount.primary_access_key
+  depends_on           = [ azurerm_app_service_plan.appServicePlan ]
 }
